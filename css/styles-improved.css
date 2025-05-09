@@ -33,7 +33,7 @@ body {
   font-family: var(--font-family);
   line-height: 1.6;
   color: var(--color-dark);
-  background-color: #f5f5f7;
+  background-color: #f5f5f7; /* Color de fondo para la vista web */
   padding-bottom: 60px;
 }
 
@@ -673,3 +673,129 @@ footer {
     width: 100%;
   }
 }
+
+/* Estilos específicos para la exportación a PDF */
+.pdf-export {
+  width: 100%; /* Asegurar que tome el ancho completo para html2canvas */
+  margin: 0 !important; /* Eliminar márgenes externos para el PDF */
+  padding: 15px !important; /* Reducir padding para más contenido en PDF */
+  box-shadow: none !important; /* Sin sombras en el PDF */
+  border-radius: 0 !important; /* Sin bordes redondeados en PDF */
+  background-color: var(--color-white) !important; /* Fondo blanco para PDF */
+  font-size: 10pt; /* Tamaño de fuente base para PDF, ajustar según sea necesario */
+  line-height: 1.4; /* Ajustar interlineado para PDF */
+}
+
+.pdf-export .plan-header h2 {
+  font-size: 16pt;
+}
+
+.pdf-export .plan-info-cliente,
+.pdf-export .plan-resumen,
+.pdf-export .plan-detalles,
+.pdf-export .plan-tabla-container,
+.pdf-export .plan-footer {
+  margin-bottom: 15px; /* Reducir márgenes internos para PDF */
+  padding: 10px; /* Reducir padding interno para PDF */
+}
+
+.pdf-export .plan-resumen {
+  flex-direction: row; /* Forzar fila en PDF si es necesario */
+  align-items: flex-start;
+}
+
+.pdf-export .plan-grafico-container {
+  max-width: 40%; /* Ajustar tamaño del gráfico en PDF */
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.pdf-export .plan-resumen-datos {
+  padding-left: 15px;
+}
+
+.pdf-export .plan-resumen-item {
+  font-size: 9pt;
+}
+.pdf-export .plan-resumen-value {
+  font-size: 10pt;
+}
+.pdf-export .plan-resumen-item.destacado .plan-resumen-value {
+  font-size: 11pt;
+}
+
+.pdf-export .plan-detalles h3,
+.pdf-export .plan-tabla-container h3 {
+  font-size: 12pt;
+  margin-bottom: 10px;
+}
+
+.pdf-export .plan-detalles-grid {
+  gap: 10px;
+}
+
+.pdf-export .plan-detalle-item {
+  padding: 10px;
+}
+
+.pdf-export .plan-detalle-label {
+  font-size: 8pt;
+}
+
+.pdf-export .plan-detalle-value {
+  font-size: 10pt;
+}
+
+.pdf-export .plan-tabla th,
+.pdf-export .plan-tabla td {
+  padding: 6px 8px; /* Menor padding en tablas PDF */
+  font-size: 9pt;
+  word-break: break-word; /* Evitar que el texto largo rompa la tabla */
+}
+
+.pdf-export .plan-footer {
+  font-size: 8pt;
+  margin-top: 20px;
+  padding-top: 10px;
+}
+
+/* Ocultar elementos no deseados en el PDF */
+.pdf-export .plan-actions,
+.pdf-export #btnEditarContrato /* Si existe */
+{
+  display: none !important;
+}
+
+/* Forzar saltos de página (usar con precaución) */
+.page-break-before {
+  page-break-before: always !important;
+}
+
+@media print {
+  body {
+    background-color: var(--color-white);
+    padding-bottom: 0;
+  }
+  header, footer, #simulador, .plan-actions, #historialContainer, #indicadorCarga, .notificacion {
+    display: none !important;
+  }
+  main {
+    max-width: none;
+    padding: 0;
+    margin: 0;
+  }
+  #planContainerOuter {
+    margin: 0;
+  }
+  #plan-de-liquidacion {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 10mm;
+    font-size: 10pt;
+  }
+  /* Aplicar estilos de .pdf-export también para impresión directa */
+  #plan-de-liquidacion.pdf-export, #plan-de-liquidacion {
+    /* Re-aplicar o asegurar estilos de .pdf-export aquí si es necesario */
+  }
+}
+
